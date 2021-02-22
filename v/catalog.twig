@@ -1,0 +1,41 @@
+<div class="what-we-do container">
+    <h3 class="heading">Каталог товаров</h3>
+    <div class="flex">
+        <div class="card-box">
+
+            {% if goods %}
+            {% for good in goods %}
+
+            <div class='card'>
+                <div class="wrapGoodImg">
+
+                    <a href="index.php?class=page&method=good&id={{ good.id }}"><img class='box_img'
+                            src="assets/img/catalog/{{ good.img }}"></a>
+
+                </div>
+                <div class="wrapGoodInfo">
+                    <div class='heading_mini_form'>{{ good.title }}</div>
+
+                    <div class='goodsPrice'> {{ good.price }} <b>&#8381;</b></div>
+
+                    <div class='goodsParam'><span><b>Состав: будет же</b></span> </div>
+                </div>
+                <div class="btnWrap">
+                    <a class="button btn" href="index.php?class=cart&method=add&id={{ good.id }}">Добавить</a>
+
+                    <a class="button btn" href="index.php?class=cart&method=delete&id={{ good.id }}">Удалить </a>
+
+                </div>
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <p class="empty_catalog_message">В данной категории ничего не найдено</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<div>
+    <img class="" src="" alt=" ">
+</div>

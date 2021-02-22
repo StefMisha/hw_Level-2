@@ -1,0 +1,88 @@
+<header class="header nav_top">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-lightNone">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse nav_top" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php?class=page&method=catalog">Главная<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='index.php?class=page&method=comment'>Контакты и отзывы /в работе /</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../public/promo.php">Акции /в работе /</a>
+                </li>
+
+                {% if user == true %}
+
+                <li class='nav-item'><a class='nav-link' href='index.php?class=user&method=getUser'>Кабинет</a></li>
+                <li class='nav-item'><a class='nav-link' href='index.php?class=user&method=logout'>Выйти &nbsp; {{user}}</a></li>
+
+                {% endif %}
+                {% if user == false %}
+
+                 <li class='nav-item'><a class='nav-link' href='index.php?class=user&method=login'><u>Войти</u></a></li>
+                   <li class='nav-item'><a class='nav-link' href='index.php?class=user&method=regUser'><u>Регистрация</u></a></li>
+
+                {% endif %}
+
+                {% if user == "Admin" %}
+
+                           <li class='nav-item'><a class='nav-link' href='../admin/admin.php'>Админка</a></li>
+                    <li class='nav-item'><a class='nav-link' href='../admin/manager.php'>Управление заказами /в работе /</a></li>
+            </ul>
+            {% endif %}
+
+        </div>
+
+		<!-- Button trigger modal -->
+        <button class="btn btn-outline-success btn-primary basketInfoOut" type="button" onclick='renderBasketModal()' data-toggle="modal" data-target="#bascketModal">
+            {% if cartCount %}
+          <strong>В корзина: </strong>
+                {{ cartCount }} товар(-ов)
+            {% else %}
+                Корзина пуста :((
+            {% endif %} </button></a>
+
+
+        </button>
+    </nav>
+
+	<!-- Modal -->
+        <div class="modal fade" id="bascketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">КОРЗИНА</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        {% if cartCount %}
+                            {{ cartCount }} товар(-ов)
+                        {% else %}
+                            Корзина пуста
+                        {% endif %}
+
+                    </div>
+                    <div class="modal-footer">
+                        {% if user == true %}
+                            <a  href="index.php?class=cart&method=buy"><button type="button" class="btn btn-primary">Подтвердить покупку</button></a>
+                        {% endif %}
+                        {% if user == false %}
+                            <p class="cart_login">Для заказа необходимо
+                                <a class="cart_order_link" href="index.php?class=user&method=login" style="color:red;">авторизоваться</a>
+                            </p>
+                        {% endif %}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
